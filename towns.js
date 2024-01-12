@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+	document.getElementById("btnAdd") .addEventListener("click", addTown);
     // Existing event handler for deleting towns
     $('#btnDelete').click(deleteTown);
     
@@ -27,6 +29,28 @@ function deleteTown() {
 		$('#result').text(townName + " not found.");
 }
 
+
+function addTown() {
+	let townName = document.getElementById("townNameForAdd").value;
+	if (townName != ""){
+		document.getElementById("townNameForAdd").value = "";
+		let option = document.createElement("option");
+		option.textContent = townName;
+		
+		document.getElementById("towns").appendChild(option);
+		showMessage(townName + " added.");
+	}
+}
+		 
+	function showMessage(msg) {
+		let resultElement = document.getElementById("result");
+		resultElement.textContent = msg;
+		resultElement.style.display = "block";
+		setTimeout(function () {
+		resultElement.style.display = "none";
+		}, 3000);
+	}
+			
 function shuffleTowns() {
     let towns = Array.from(document.querySelectorAll("#towns option"));
     document.getElementById("towns").innerHTML = "";
@@ -56,3 +80,4 @@ function showMessage(msg) {
         resultElement.style.display = "none";
     }, 3000);
 }
+
